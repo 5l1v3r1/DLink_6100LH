@@ -38,34 +38,52 @@ When I reached the last setting, the dlink / camera also requires a PIN code and
 
 * Script for read serial communication
 
-    #!/bin/bash
+      #!/bin/bash
 
-    while true; 
-      do tty=/dev/ttyACM0
-      exec 4<$tty 5>$tty
-      stty -F $tty 115200 -echo >&5;
-      read reply <&4;echo "$reply"; 
-    done |tee dc_6200lh.txt
+      while true; 
+        do tty=/dev/ttyACM0
+        exec 4<$tty 5>$tty
+        stty -F $tty 115200 -echo >&5;
+        read reply <&4;echo "$reply"; 
+      done |tee dc_6200lh.txt
 
 
 ##### Grep Password
 
-* We can read the dc_6200lh.txt in realtime, and also we can grep what we want - Nice! 
+* We can read the dc_6200lh.txt in realtime, and also we can grep what we want - **Nice**! 
 
-    tail -f dc_6200lh.txt |egrep -i "Wifi_ap_pwd"
+      tail -f dc_6200lh.txt |egrep -i "Wifi_ap_pwd"
  
 ##### And here we go, pin-code found:
 
-![Screenshot](.preview/get_pin.gif)
-   
     tail -f dc_6200lh.txt|egrep -o 'user=admin,pass=......' 
 
-* Catching, done, no hacks needed and no brute-force needed.
+![Screenshot](.preview/get_pin.gif)
+   
+* Catching, **done**.  No hacks needed and no brute-force needed.
 
-#### Full Boot Process
+#### See Full Boot Process
 
 Right click on the video and press open image on a new tab for get 1080p resolution for readable text.
 
 ![Screenshot](.preview/4.gif)
 
+## Changelog
 
+[Versions changelog](CHANGELOG.md).
+
+## Authors: 
+
+* **wuseman <wuseman@nr1.nu\>** 
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE.md) file for details
+
+### Contact
+
+  If you have problems, questions, ideas or suggestions please contact me on *_wuseman@nr1.nu_  - For faster contact visit Libera irc network or the webchat and type '/msg wuseman hi!' in the input bar and I will reply to you ASAP.
+  
+  Enter Libera's network via your own client 'chat.libera.chat:+6697 or use their new web client [here](https://web.libera.chat/).
+
+__The End__
