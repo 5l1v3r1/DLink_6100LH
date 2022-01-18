@@ -12,11 +12,11 @@ Update: I was about to use tcl and expect to write a brute-force scripts for fin
 
 Why I disassembled this dlink camera is because I did not have the password and in the Dlinks app you can only add the camera by connecting to their wifi so I disassembled the device and hoped that it would be easy to get root access and solve this the problem.
 
-It did not take much, three screws to disassemble this device and txd / rxd / gnd I found before I he flashed at the bottom of the usb port there were 3 inputs, the password was found directly in the bootlog.
+It was easy done and there is three screws to disassemble this device and three contacts to release, txd/rxd/ gnd I found within 1 seconds, to the left of the micro-usb input, see pictures below.
 
-I logged in to the access point from the camera and now I can finally use the camera because it is quite good for the cheap price you get it for in 1080p, **I THOUGHT!**
+However, I logged in to the access point from the camera since password is printed in stdout when reading serial console and now I could finally use the camera because it is quite good for the cheap price you get it for in 1080p, **I THOUGHT!**
 
-When I reached the last setting, the dlink / camera also requires a PIN code and now I have to hack the device anyway and bypass the login, I will re-update this page when I succeed, I never googling before I succeed, thats cheat ;)
+When I reached the last setting, the dlink / camera also requires a PIN code and now I have to hack the device anyway and bypass the login (update: this is now done, see more below)
 
 ### Some photos taken during the process
 
@@ -68,6 +68,24 @@ Right click on the video and press open image on a new tab for get 1080p resolut
 
 ![Screenshot](.preview/4.gif)
 
+
+#### There is nothing more to add about this device that is interesting that you cant figure out yourself, btw, default ip and opened ports: 
+
+    IP: 192.168.0.20 
+    
+    Ports: 
+    554
+    8080
+    7000
+    6000
+ 
+* Access UBOOT by hit any key before 5 seconds when it boots, and from u-boot menu you should read on some wiki how to use the commands but printenv or 'pr' will print the interesting things, to edit bootargs for example you just tneet to type: 
+ 
+    setenv bootargs console=ttyS0,115200............... 
+   
+Bypass login by add: init=/bin/sh in bootargs
+
+
 ## Changelog
 
 [Versions changelog](CHANGELOG.md).
@@ -86,4 +104,4 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
   
   Enter Libera's network via your own client 'chat.libera.chat:+6697 or use their new web client [here](https://web.libera.chat/).
 
-__The End__
+#### Happy Hacking! 
