@@ -38,15 +38,17 @@ When I reached the last setting, the dlink / camera also requires a PIN code and
 
 * Script for read serial communication
 
-      #!/bin/bash
+```sh
+#!/bin/bash
 
-      while true; 
-        do tty=/dev/ttyACM0
-        exec 4<$tty 5>$tty
-        stty -F $tty 115200 -echo >&5;
-        read r <&4;
-        echo "$r"; 
-      done |tee dc_6200lh.txt
+while true; 
+    do tty=/dev/ttyACM0
+    exec 4<$tty 5>$tty
+    stty -F $tty 115200 -echo >&5;
+    read r <&4;
+    echo "$r"; 
+done |tee dc_6200lh.txt
+```
 
 * The while loop creates a 'monitor' for the serial communication. If you wanna bruteforce the login just for fun then then we want to see what happens and thereforce its the perfect way to go for see what is going on another window, however it's an awesome way to read serial stdin without using more advanced languages for this kind of tasks, below is an example how we can could use expect for a bruteforce script:
 
@@ -89,11 +91,14 @@ done
 
 * We can read the dc_6200lh.txt in realtime, and also we can grep what we want - **Nice**! 
 
-      tail -f dc_6200lh.txt |egrep -i "Wifi_ap_pwd"
- 
+```sh
+tail -f dc_6200lh.txt |egrep -i "Wifi_ap_pwd"
+``` 
 ##### And, ohyeah here we go, pin-code found:
 
-    tail -f dc_6200lh.txt|egrep -o 'user=admin,pass=......' 
+```sh
+tail -f dc_6200lh.txt|egrep -o 'user=admin,pass=......' 
+```
 
 ![Screenshot](.preview/get_pin.gif)
    
@@ -108,14 +113,9 @@ Right click on the video and press open image on a new tab for get 1080p resolut
 
 #### There is nothing more to add about this device that is interesting that you cant figure out yourself, btw, default ip and opened ports: 
 
-    IP: 192.168.0.20 
+    IP...: 192.168.0.20 
+    Ports: 554,8080,7000,6000
     
-    Ports: 
-    554
-    8080
-    7000
-    6000
-  
 ## U-Boot:
 
     U-Boot 2016.11 (Jul 01 2020 - 17:46:25 +0800)
