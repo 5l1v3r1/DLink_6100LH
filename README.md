@@ -81,9 +81,11 @@ Right click on the video and press open image on a new tab for get 1080p resolut
  
 * Access UBOOT by hit any key before 5 seconds when it boots, and from u-boot menu you should read on some wiki how to use the commands but printenv or 'pr' will print the interesting things, to edit bootargs for example you just tneet to type: 
  
-    setenv bootargs console=ttyS0,115200............... 
+       setenv bootargs console=ttyS0,115200............... 
    
-Bypass login by add: init=/bin/sh in bootargs
+Bypass login by add the below line to bootargs but it is really not needed since password is the pin-code we can grab as on the vide above the default user is, yeah watch the video, admin!
+
+       setenv bootargs $(BOOTARGS) init=/bin/sh 
 
 
 ## Changelog
