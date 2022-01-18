@@ -48,7 +48,8 @@ When I reached the last setting, the dlink / camera also requires a PIN code and
         echo "$r"; 
       done |tee dc_6200lh.txt
 
-* Without the while loop things wont be monitored and print everything, you will read everything one line by another and it sucks. Especially if you wanna bruteforce the login then we want see what happens in another window. For read username and password like above the loop is required, however it is an awesome way to read serial communications without using more advanced language, tcl is awesome for this otherwise and for everyone that is new to this and curios about this topic:
+* The while loop creates a 'monitor' for the serial communication. If you wanna bruteforce the login just for fun then then we want to see what happens and thereforce its the perfect way to go for see what is going on another window, however it's an awesome way to read serial stdin without using more advanced languages for this kind of tasks, below is an example how we can could use expect for a bruteforce script:
+
 
 ```tcl
 set baud 115200
@@ -71,7 +72,9 @@ expect {
 interact
 ```
 
-And for bruteforce this, we know the pin-code is a length of six numbers so IF the pin-code wasnt in serial output I would just generate numbers from 00000-999999 and in a for loopp, really simple and basic tcl and shell knowledge needed, however since the serial communication replies within milliseconds after a failed login we would hack this pin-code within few monutes. My slow i7 cpu I generats numbers from 000000 to 999999 in 26 seconds, but for stay on the safe side we could add a timeout every 500ms in the code above for not missing any exit status for know when pin code would ahve been found, so something below would done the job for us:
+..since we know the pin-code is a length of six numbers we could generate numbers from 00000-999999 in a simple bash for loop, however since the device in serial replies within milliseconds (this is often set on the other side but not on this dlink camera it seems, it has no time limit set for failed passwords) I would hack this pin-code within few minutes, ~10minutes max with my slow CPU (**Intel(R) Core(TM) i7-5600U CPU @ 2.60GHz**)
+
+My CPU generates 000000 to 999999 in 26 seconds, we want to stay on the safe side when we bruteForcing so a timeout is needed for not miss any true value when pincode is found, a timeout every 500ms for every failed login by using 'set timeout X' in the code snippet above would be perfect for not fuck up the exit code so we know when the value is true and the pin code is found, however see below and copy and paste and if **you** have some basic knowledge about tcl and shell, you have everything you need to getting started:
 
 ```sh
 for pin-codes in $(seq -w 000000 99999); do
@@ -80,15 +83,15 @@ for pin-codes in $(seq -w 000000 99999); do
 done
 ```
 
-Now you have a great start for getting started if you wanna brute-force a device via serial communication, actually I made a quick google search on this and there was nothing found really but its really easy to fix, tcl **pwnz** when we using serial communications for 'expect(ing)' and automate logins, for example.
+* TCL **pwnz** when we using serial communications for 'expect(ing)' and automate stuff via serial communication, whatever. Lets move further and see how we grab everything in plain-text without using some hacking scripts.
 
-##### Grep Password
+##### Grep WiFi Password
 
 * We can read the dc_6200lh.txt in realtime, and also we can grep what we want - **Nice**! 
 
       tail -f dc_6200lh.txt |egrep -i "Wifi_ap_pwd"
  
-##### And here we go, pin-code found:
+##### And, ohyeah here we go, pin-code found:
 
     tail -f dc_6200lh.txt|egrep -o 'user=admin,pass=......' 
 
