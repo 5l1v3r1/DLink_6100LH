@@ -38,7 +38,7 @@ When I reached the last setting, the dlink / camera also requires a PIN code and
 
 * Script for read serial communication
 
-#!/bin/bash
+    #!/bin/bash
 
     while true; 
       do tty=/dev/ttyACM0
