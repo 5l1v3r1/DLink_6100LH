@@ -28,7 +28,7 @@ When I reached the last setting, the dlink / camera also requires a PIN code and
 
 ![Screenshot](.preview/3.jpg)
 
-#### And we all is aware of 2034, odd odd its on the board on this camer. See upper left corner :) 
+#### And we all *nix n3rds is well aware of 2034, odd odd its on the board on this camera. See upper left corner :) 
 
 ![Screenshot](.preview/2034.jpg)
 
