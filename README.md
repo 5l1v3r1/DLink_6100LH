@@ -44,9 +44,43 @@ When I reached the last setting, the dlink / camera also requires a PIN code and
         do tty=/dev/ttyACM0
         exec 4<$tty 5>$tty
         stty -F $tty 115200 -echo >&5;
-        read reply <&4;echo "$reply"; 
+        read r <&4;
+        echo "$r"; 
       done |tee dc_6200lh.txt
 
+* Without the while loop things wont be monitored and print everything, you will read everything one line by another and it sucks. Especially if you wanna bruteforce the login then we want see what happens in another window. For read username and password like above the loop is required, however it is an awesome way to read serial communications without using more advanced language, tcl is awesome for this otherwise and for everyone that is new to this and curios about this topic:
+
+```tcl
+set baud 115200
+if { $argc >= 1 } {
+ set tty [lindex $argv 0]
+}
+if { $argc >= 2 } {
+ set baud [lindex $argv 1]
+}
+spawn screen /dev/ttyACM0 $baud
+send \r
+expect {
+      "DCS-6100LH login: " {
+           send admin\r
+           expect "Password: "
+           send $pin-codes\r
+       }
+       "#" 
+    }
+interact
+```
+
+And for bruteforce this, we know the pin-code is a length of six numbers so IF the pin-code wasnt in serial output I would just generate numbers from 00000-999999 and in a for loopp, really simple and basic tcl and shell knowledge needed, however since the serial communication replies within milliseconds after a failed login we would hack this pin-code within few monutes. My slow i7 cpu I generats numbers from 000000 to 999999 in 26 seconds, but for stay on the safe side we could add a timeout every 500ms in the code above for not missing any exit status for know when pin code would ahve been found, so something below would done the job for us:
+
+```sh
+for pin-codes in $(seq -w 000000 99999); do
+....tcl code above
+.......**set timeout -1**
+done
+```
+
+Now you have a great start for getting started if you wanna brute-force a device via serial communication, actually I made a quick google search on this and there was nothing found really but its really easy to fix, tcl **pwnz** when we using serial communications for 'expect(ing)' and automate logins, for example.
 
 ##### Grep Password
 
