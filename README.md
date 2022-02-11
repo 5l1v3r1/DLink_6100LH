@@ -2,13 +2,13 @@
 
 Update: I was about to use tcl and expect to write a brute-force scripts for find the pin-code but it was never neded.
 
-#### Hardware Used:
+### Hardware Used:
 
   * Arduino SA Uno R3 (CDC ACM)
   * DLINK 6100LH IPCam
   * System: Gentoo Linux
 
-#### About/Info/Reason 
+### About/Info/Reason 
 
 Why I disassembled this dlink camera is because I did not have the password and in the Dlinks app you can only add the camera by connecting to their wifi so I disassembled the device and hoped that it would be easy to get root access and solve this the problem.
 
@@ -24,11 +24,15 @@ When I reached the last setting, the dlink / camera also requires a PIN code and
 ![Screenshot](.preview/1.jpg)
 ![screenshot](.preview/2.jpg)
 
-#### The chinese characters, I tried google the characters without any luck and didnt spend more time in digging deeper but Im sure D-Link doing as everyone else, buying some cheap cameras from china, putting their own awful logo on it and re-selling it for 10x higher price then in china. We all can belive how things are but proof is allways neded. What a fucking joke, Boycott all IoT and american companies for your own safety and go buy the IoT devices from asia instead, no reason to pay 10x when you dont need.
+#### Interesting
+
+The chinese characters, I tried google the characters without any luck and didnt spend more time in digging deeper but Im sure D-Link doing as everyone else, buying some cheap cameras from china, putting their own awful logo on it and re-selling it for 10x higher price then in china. We all can belive how things are but proof is allways neded. What a fucking joke, Boycott all IoT and american companies for your own safety and go buy the IoT devices from asia instead, no reason to pay 10x when you dont need.
 
 ![Screenshot](.preview/3.jpg)
 
-#### And we all *nix n3rds is well aware of 2034, odd odd its on the board on this camera. See upper left corner :) 
+#### Odd Info
+
+And we all *nix n3rds is well aware of 2034, odd odd its on the board on this camera. See upper left corner :) 
 
 ![Screenshot](.preview/2034.jpg)
 
@@ -110,14 +114,16 @@ Right click on the video and press open image on a new tab for get 1080p resolut
 
 ![Screenshot](.preview/4.gif)
 
+### IP/Ports
 
-#### There is nothing more to add about this device that is interesting that you cant figure out yourself, btw, default ip and opened ports: 
+There is nothing more to add about this device that is interesting that you cant figure out yourself, btw, default ip and opened ports: 
 
     IP...: 192.168.0.20 
     Ports: 554,8080,7000,6000
     
-## U-Boot:
+### U-Boot:
 
+```sh
     U-Boot 2016.11 (Jul 01 2020 - 17:46:25 +0800)
     mips-linux-uclibc-xgcc (Realtek RSDK-6.4.1 Build 3029) 6.4.1 20180425
     GNU ld (Realtek RSDK-6.4.1 Build 3029) 2.27.90.20161222
@@ -182,31 +188,33 @@ Right click on the video and press open image on a new tab for get 1080p resolut
     stderr=serial
     stdin=serial
     stdout=serial
+```
 
 Access UBOOT by hit any key before 5 seconds when it boots, and from u-boot menu you should read on some wiki how to use the commands but printenv or 'pr' will print the interesting things, to edit bootargs for example you just tneet to type: 
  
-    setenv bootargs console=ttyS0,115200............... 
-   
+```sh
+setenv bootargs console=ttyS0,115200............... 
+```   
 Bypass login by add the below line to bootargs but it is really not needed since password is the pin-code we can grab as on the video provided above and yeah so  are the default username wich is: admin:
 
+```sh
     setenv bootargs $(BOOTARGS) init=/bin/sh 
     boot
+```
 
 I do not recommending anyone to change bootargs cause its useless as said. If you get stuck in boot after you played with bootargs and get a kernel panic for some reason - **DON'T PANIC ;)** - Restart the device and enter CFE boot and reset default by:
 
+```sh
     env default -a
     saveenv
     reset
-   
-## Sources:
+```
+
+### Sources
 
 [Device Info](https://www.dlink.com/en/products/dcs-6100lh-compact-full-hd-wi-fi-camera)
 
-## Changelog
-
-[Versions changelog](CHANGELOG.md).
-
-## Authors: 
+### Authors
 
 * **wuseman <wuseman@nr1.nu\>** 
 
@@ -220,4 +228,4 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
   
   Enter Libera's network via your own client 'chat.libera.chat:+6697 or use their new web client [here](https://web.libera.chat/).
 
-#### Happy Hacking! 
+- **Happy Hacking!**
