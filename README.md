@@ -124,58 +124,61 @@ There is nothing more to add about this device that is interesting that you cant
 ### U-Boot:
 
 ```sh
-    U-Boot 2016.11 (Jul 01 2020 - 17:46:25 +0800)
-    mips-linux-uclibc-xgcc (Realtek RSDK-6.4.1 Build 3029) 6.4.1 20180425
-    GNU ld (Realtek RSDK-6.4.1 Build 3029) 2.27.90.20161222
-    => help     
-    ?       - alias for 'help'
-    base    - print or set address offset
-    bdinfo  - print Board Info structure
-    boot    - boot default, i.e., run 'bootcmd'
-    bootd   - boot default, i.e., run 'bootcmd'
-    bootelf - Boot from an ELF image in memory
-    bootm   - boot application image from memory
-    bootvx  - Boot vxWorks from an ELF image
-    cmp     - memory compare
-    coninfo - print console devices and information
-    cp      - memory copy
-    crc32   - checksum calculation
-    dma     - dma copy
-    editenv - edit environment variable
-    env     - environment handling commands
-    fatinfo - print information about filesystem
-    fatload - load binary file from a dos filesystem
-    fatls   - list files in a directory (default /)
-    fatsize - determine a file's size
-    fephy   - fephy read/write
-    go      - start application at address 'addr'
-    help    - print command description/usage
-    iminfo  - print header information for application image
-    imls    - list all images found in flash
-    imxtract- extract a part of a multi-image
-    md      - memory display
-    mm      - memory modify (auto-incrementing address)
-    mmc     - MMC sub system
-    mmcinfo - display MMC info
-    mw      - memory write (fill)
-    nfs     - boot image via network using NFS protocol
-    nm      - memory modify (constant address)
-    ping    - send ICMP ECHO_REQUEST to network host
-    printenv- print environment variables
-    reset   - Perform RESET of the CPU
-    run     - run commands in an environment variable
-    saveenv - save environment variables to flash
-    setenv  - set environment variables
-    setethaddr- set eth address
-    setipaddr- set ip address
-    sf      - SPI flash sub-system
-    sleep   - delay execution for some time
-    tftpboot- boot image via network using TFTP protocol
-    tftpput - TFTP put command, for uploading files to a server
-    tftpsrv - act as a TFTP server and boot the first received file
-    update  - update xxx
-    version - print monitor, compiler and linker version
+U-Boot 2016.11 (Jul 01 2020 - 17:46:25 +0800)
+mips-linux-uclibc-xgcc (Realtek RSDK-6.4.1 Build 3029) 6.4.1 20180425
+GNU ld (Realtek RSDK-6.4.1 Build 3029) 2.27.90.20161222
 
+=> help 
+?   - alias for 'help'
+base - print or set address offset
+bdinfo  - print Board Info structure
+boot- boot default, i.e., run 'bootcmd'
+bootd - boot default, i.e., run 'bootcmd'
+bootelf - Boot from an ELF image in memory
+bootm - boot application image from memory
+bootvx - Boot vxWorks from an ELF image
+cmp - memory compare
+coninfo - print console devices and information
+cp  - memory copy
+crc32   - checksum calculation
+dma - dma copy
+editenv - edit environment variable
+env - environment handling commands
+fatinfo - print information about filesystem
+fatload - load binary file from a dos filesystem
+fatls   - list files in a directory (default /)
+fatsize - determine a file's size
+fephy   - fephy read/write
+go - start application at address 'addr'
+help - print command description/usage
+iminfo  - print header information for application image
+imls- list all images found in flash
+imxtract- extract a part of a multi-image
+md - memory display
+mm - memory modify (auto-incrementing address)
+mmc - MMC sub system
+mmcinfo - display MMC info
+mw  - memory write (fill)
+nfs - boot image via network using NFS protocol
+nm  - memory modify (constant address)
+ping - send ICMP ECHO_REQUEST to network host
+printenv - print environment variables
+reset - Perform RESET of the CPU
+run - run commands in an environment variable
+saveenv - save environment variables to flash
+setenv - set environment variables
+setethaddr - set eth address
+setipaddr - set ip address
+sf - SPI flash sub-system
+sleep - delay execution for some time
+tftpboot - boot image via network using TFTP protocol
+tftpput - TFTP put command, for uploading files to a server
+tftpsrv - act as a TFTP server and boot the first received file
+update  - update xxx
+version - print monitor, compiler and linker version
+```
+
+```sh
     => printenv 
     baudrate=57600
     bootaddr=0xBC000000 + 0x50000
@@ -195,19 +198,20 @@ Access UBOOT by hit any key before 5 seconds when it boots, and from u-boot menu
 ```sh
 setenv bootargs console=ttyS0,115200............... 
 ```   
+
 Bypass login by add the below line to bootargs but it is really not needed since password is the pin-code we can grab as on the video provided above and yeah so  are the default username wich is: admin:
 
 ```sh
-    setenv bootargs $(BOOTARGS) init=/bin/sh 
-    boot
+setenv bootargs $(BOOTARGS) init=/bin/sh 
+boot
 ```
 
 I do not recommending anyone to change bootargs cause its useless as said. If you get stuck in boot after you played with bootargs and get a kernel panic for some reason - **DON'T PANIC ;)** - Restart the device and enter CFE boot and reset default by:
 
 ```sh
-    env default -a
-    saveenv
-    reset
+env default -a
+saveenv
+reset
 ```
 
 ### Sources
