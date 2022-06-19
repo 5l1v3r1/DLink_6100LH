@@ -20,21 +20,22 @@ When I reached the last setting, the dlink / camera also requires a PIN code and
 
 ### Some photos taken during the process
 
-![Screenshot](.preview/0.jpg)
-![Screenshot](.preview/1.jpg)
-![screenshot](.preview/2.jpg)
+![0](https://user-images.githubusercontent.com/26827453/174461512-eef4fbdf-cb08-408d-9df9-ea01238957f6.jpg)
+![1](https://user-images.githubusercontent.com/26827453/174461513-b0e070cc-52fe-4676-a7a0-1dbb4f20a757.jpg)
+![2](https://user-images.githubusercontent.com/26827453/174461514-f611e2c9-6ae2-4356-9201-16c1baec5740.jpg)
+
 
 #### Interesting
 
 The chinese characters, I tried google the characters without any luck and didnt spend more time in digging deeper but Im sure D-Link doing as everyone else, buying some cheap cameras from china, putting their own awful logo on it and re-selling it for 10x higher price then in china. We all can belive how things are but proof is allways neded. What a fucking joke, Boycott all IoT and american companies for your own safety and go buy the IoT devices from asia instead, no reason to pay 10x when you dont need.
 
-![Screenshot](.preview/3.jpg)
+![3](https://user-images.githubusercontent.com/26827453/174461515-b74b9245-a19d-4712-bae1-fc9d12d0e5f0.jpg)
 
 #### Odd Info
 
 And we all *nix n3rds is well aware of 2034, odd odd its on the board on this camera. See upper left corner :) 
 
-![Screenshot](.preview/2034.jpg)
+![2034](https://user-images.githubusercontent.com/26827453/174461516-00882c98-a3c0-4c38-8e41-b94aaad5246d.jpg)
 
 #### STdin/STdout 
 
@@ -104,7 +105,7 @@ tail -f dc_6200lh.txt |egrep -i "Wifi_ap_pwd"
 tail -f dc_6200lh.txt|egrep -o 'user=admin,pass=......' 
 ```
 
-![Screenshot](.preview/get_pin.gif)
+![get_pin](https://user-images.githubusercontent.com/26827453/174461534-3ee340e4-2dcf-4384-a19e-0c72181abeff.gif)
    
 * Catching, **done**.  No hacks needed and no brute-force needed.
 
